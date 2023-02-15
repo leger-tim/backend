@@ -18,9 +18,9 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use((req, res) => {
-   res.json({ message: 'Votre requête a bien été reçue !' }); 
-});
+// app.use((req, res) => {
+//    res.json({ message: 'Votre requête a bien été reçue !' }); 
+// });
 
 app.use('/api/auth', userRoutes);
 
