@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
+const userRoutes = require('./routes/user');
 const app = express();
 
 mongoose.connect('mongodb+srv://tim:WnX5e0KGVQIiM4Or@cluster0.yrmdeue.mongodb.net/?retryWrites=true&w=majority',
@@ -21,5 +21,7 @@ app.use((req, res, next) => {
 app.use((req, res) => {
    res.json({ message: 'Votre requête a bien été reçue !' }); 
 });
+
+app.use('/api/auth', userRoutes);
 
 module.exports = app;
