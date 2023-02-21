@@ -5,7 +5,16 @@ const sauceRoutes = require('./routes/sauce');
 const path = require('path');
 const app = express();
 
-mongoose.connect('mongodb+srv://tim:WnX5e0KGVQIiM4Or@cluster0.yrmdeue.mongodb.net/?retryWrites=true&w=majority')
+const dotenv = require("dotenv");
+dotenv.config();
+const password = process.env.DB_PASSWORD;
+const user = process.env.DB_USER;
+const uri = `mongodb+srv://${user}:${password}@cluster0.yrmdeue.mongodb.net/?retryWrites=true&w=majority`
+
+
+mongoose.connect(uri,
+{ useNewUrlParser: true,
+  useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 

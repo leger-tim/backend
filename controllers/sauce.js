@@ -1,5 +1,7 @@
 const Sauce = require('../models/Sauce');
 const fs = require('fs');
+const dotenv = require("dotenv");
+dotenv.config();
 
 exports.getAllSauce = (req, res, next) => {
   // Utilise la méthode find() pour récupérer toutes les sauces dans la base de données
@@ -94,10 +96,11 @@ exports.createSauce = (req, res, next) => {
         });
  };
   
-exports.likeDislikeSauce = (req, res, next) => {
-  if (!req.isAuthenticated()) {
+ exports.likeDislikeSauce = (req, res, next) => {
+  if (!req.auth || !req.auth.userId) {
     return res.status(401).json({ error: 'Unauthorized' });
-    }
+  }
+  
   // On récupère l'objet Sauce correspondant à l'id fourni dans la requête
   Sauce.findOne({ _id: req.params.id })
     .then(sauce => {

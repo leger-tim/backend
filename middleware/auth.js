@@ -1,10 +1,13 @@
 const jwt = require('jsonwebtoken');
- 
+const dotenv = require("dotenv");
+dotenv.config();
+
+const MY_TOKEN_PW = process.env.TOKEN_PW;
+
 module.exports = (req, res, next) => {
    try {
        const token = req.headers.authorization.split(' ')[1];
-       // Mot de passe généré avec Lastpass
-       const decodedToken = jwt.verify(token, 'sCp@tvu*&S9xc5ZC0F7I');
+       const decodedToken = jwt.verify(token, MY_TOKEN_PW);
        const userId = decodedToken.userId;
        req.auth = {
            userId: userId
