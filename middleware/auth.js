@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken');
 module.exports = (req, res, next) => {
    try {
        const token = req.headers.authorization.split(' ')[1];
-       const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+       // Mot de passe généré avec Lastpass
+       const decodedToken = jwt.verify(token, 'sCp@tvu*&S9xc5ZC0F7I');
        const userId = decodedToken.userId;
        req.auth = {
            userId: userId

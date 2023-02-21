@@ -5,9 +5,7 @@ const sauceRoutes = require('./routes/sauce');
 const path = require('path');
 const app = express();
 
-mongoose.connect('mongodb+srv://tim:WnX5e0KGVQIiM4Or@cluster0.yrmdeue.mongodb.net/?retryWrites=true&w=majority',
-  { useNewUrlParser: true,
-    useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://tim:WnX5e0KGVQIiM4Or@cluster0.yrmdeue.mongodb.net/?retryWrites=true&w=majority')
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
@@ -19,10 +17,6 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
-
-// app.use((req, res) => {
-//    res.json({ message: 'Votre requête a bien été reçue !' }); 
-// });
 
 app.use('/api/auth', userRoutes);
 app.use('/api/sauces', sauceRoutes);
